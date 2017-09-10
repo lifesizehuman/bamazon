@@ -1,28 +1,28 @@
-var mysql = require('mysql');
-var inquirer = require('inquirer');
+var mysql = require("mysql");
+var inquirer = require("inquirer");
 
 var connection = mysql.createConnection({
-  host: 'localhost',
+  host: "localhost",
   port: 8889,
-  user: 'root',
-  password: 'insecure',
-  database: 'bamazon'
+  user: "root",
+  password: "insecure",
+  database: "bamazon"
 });
 
 connection.connect(function(err) {
   if (err) {
     return console.log(err);
   }
-  queryBamazon()
+  queryBamazon();
 });
 
 function queryBamazon() {
   console.log("Items up for sale");
-  console.log('------------------');
-  connection.query('SELECT * FROM products', function(err, res) {
+  console.log("------------------");
+  connection.query("SELECT * FROM products", function(err, res) {
     for (var i = 0; i < res.length; i++) {
-      console.log(res[i].item_id + ' | ' + res[i].product_name + ' | ' + "$" + res[i].price + ' | ' + res[i].quantity);
-      console.log('------------------');
+      console.log(res[i].item_id + " | " + res[i].product_name + " |  $" + res[i].price + " | " + res[i].quantity);
+      console.log("------------------");
     }
     mainMenu();
   });
@@ -38,16 +38,15 @@ var mainMenu = function() {
     }
   ]).then(function(res) {
     switch (res.choice) {
-      case("Exit"):
+      case ("Exit"):
         connection.end();
         return;
-        break;
-      case("Buy an Item"):
+      case ("Buy an Item"):
         buyItem();
         break;
     }
   });
-}
+};
 
 var buyItem = function() {
   inquirer.prompt([
@@ -78,4 +77,4 @@ var buyItem = function() {
       connection.end();
     });
   });
-}
+};
