@@ -21,8 +21,8 @@ function queryBamazon () {
   console.log('------------------')
   connection.query('SELECT * FROM products', function (err, res) {
     for (var i = 0; i < res.length; i++) {
-      console.log(res[i].short_name + ' | ' + res[i].description + ' | ' + "$" + res[i].bid_price + ' | ' + res[i].aval)
-      console.log('------------------')
+      console.log(res[i].item_id + ' | ' + res[i].product_name + ' | ' + "$" + res[i].price + ' | ' + res[i].quantity);
+      console.log('------------------');
     }
     mainMenu();
   });
