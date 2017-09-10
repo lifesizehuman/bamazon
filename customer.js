@@ -1,0 +1,55 @@
+var mysql = require('mysql')
+var inquirer = require('inquirer')
+
+var connection = mysql.createConnection({
+  host: 'localhost',
+  port: 8889,
+  user: 'root',
+  password: 'insecure',
+  database: 'bamazon'
+})
+
+connection.connect(function (err) {
+  if (err) {
+    return console.log(err)
+  }
+  queryBamazon()
+})
+
+function queryBamazon () {
+  console.log("Items up for sale")
+  console.log('------------------')
+  connection.query('SELECT * FROM products', function (err, res) {
+    for (var i = 0; i < res.length; i++) {
+      console.log(res[i].short_name + ' | ' + res[i].description + ' | ' + "$" + res[i].bid_price + ' | ' + res[i].aval)
+      console.log('------------------')
+    }
+    mainMenu();
+  });
+};
+
+var mainMenu = function() {
+  inquirer.prompt([
+    {
+      type: "list",
+      message: "Please select:",
+      choices: ["Exit", "Buy an Item"],
+      name: "choice"
+    }
+  ]).then(function(res){
+    switch(res.choice){
+      case("Exit"):
+        connection.end();
+        return;
+        break;
+      case ("Buy an Item"):
+        buyItem();
+        break;
+    }
+  });
+};
+
+var buyItem = function() {
+  console.log("This is still in production.");
+  mainMenu();
+}
