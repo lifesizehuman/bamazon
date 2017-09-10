@@ -1,18 +1,24 @@
-var mysql = require('mysql')
-var inquirer = require('inquirer')
+var mysql = require('mysql');
+var inquirer = require('inquirer');
 
-var connection = mysql.createConnection({host: 'localhost', port: 8889, user: 'root', password: 'insecure', database: 'bamazon'})
+var connection = mysql.createConnection({
+  host: 'localhost',
+  port: 8889,
+  user: 'root',
+  password: 'insecure',
+  database: 'bamazon'
+});
 
 connection.connect(function(err) {
   if (err) {
-    return console.log(err)
+    return console.log(err);
   }
   queryBamazon()
-})
+});
 
 function queryBamazon() {
-  console.log("Items up for sale")
-  console.log('------------------')
+  console.log("Items up for sale");
+  console.log('------------------');
   connection.query('SELECT * FROM products', function(err, res) {
     for (var i = 0; i < res.length; i++) {
       console.log(res[i].item_id + ' | ' + res[i].product_name + ' | ' + "$" + res[i].price + ' | ' + res[i].quantity);
@@ -20,16 +26,14 @@ function queryBamazon() {
     }
     mainMenu();
   });
-};
+}
 
 var mainMenu = function() {
   inquirer.prompt([
     {
       type: "list",
       message: "Please select:",
-      choices: [
-        "Exit", "Buy an Item"
-      ],
+      choices: ["Exit", "Buy an Item"],
       name: "choice"
     }
   ]).then(function(res) {
@@ -43,7 +47,7 @@ var mainMenu = function() {
         break;
     }
   });
-};
+}
 
 var buyItem = function() {
   inquirer.prompt([
