@@ -46,29 +46,29 @@ var mainMenu = function() {
 };
 
 var buyItem = function() {
-  console.log("This is still in production.");
   inquirer.prompt([
     {
       type: "input",
-      message: "enter the name of the item you would like to buy",
-      name: "product"
+      message: "enter the item id of the product you would like to buy",
+      name: "item"
     }, {
       type: "number",
       message: "how many do you want to buy?",
       name: "quantity"
     }
   ]).then(function(argument) {
-    connection.query("SELECT quantity FROM products WHERE product_name = ?", [argument.product], function(err, res) {
+    connection.query("SELECT quantity FROM products WHERE item_id = ?", [argument.item], function(err, res) {
+      var numSold = argument.quantity;
+      var newQuantity = parseInt(res[0].quantity - numSold);
       if (err) {
         return console.log(err);
       }
       if (res[0].quantity < argument.quantity) {
         return console.log("ERROR: Insufficient store quantity.");
       }
-      connection.query("UPDATE products SET quantity WHERE product_name = ?", [argument.product]);
+      connection.query("UPDATE products SET quantity = ? WHERE item_id = ?", [newQuantity, argument.item]);
       console.log("Your order has been placed.");
       queryBamazon();
     });
   });
-  mainMenu();
 }
