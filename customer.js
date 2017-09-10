@@ -59,7 +59,7 @@ var buyItem = function() {
   ]).then(function(argument) {
     connection.query("SELECT quantity FROM products WHERE item_id = ?", [argument.item], function(err, res) {
       var numSold = argument.quantity;
-      var totalCost = parseInt(res[0].price * numSold);
+      var totalCost = parseInt(res[0].price) * numSold;
       var newQuantity = parseInt(res[0].quantity - numSold);
       if (err) {
         return console.log(err);
@@ -70,7 +70,8 @@ var buyItem = function() {
       connection.query("UPDATE products SET quantity = ? WHERE item_id = ?", [newQuantity, argument.item]);
       console.log("Your order has been placed.");
       console.log("You spent $" + totalCost + " on your purchase.");
-      queryBamazon();
+      console.log("Thank you for shopping with Bamazon. Logging you out now. Please come again.");
+      connection.end();
     });
   });
 }
