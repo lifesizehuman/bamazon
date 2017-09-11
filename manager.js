@@ -34,9 +34,9 @@ var adminMenu = function() {
       case ("View Products for Sale"):
         adminQuery();
         break;
-      // case ("View Low Inventory"):
-      //   adminLowInventory();
-      //   break;
+      case ("View Low Inventory"):
+        adminLowInventory();
+        break;
       case ("Add to Inventory"):
         adminAddInvetory();
         break;
@@ -79,7 +79,7 @@ var adminMenu = function() {
         }
         connection.query("UPDATE products SET quantity = ? WHERE item_id = ?", [newInventory, argument.item]);
         console.log(argument.quantity + " units added to inventory.");
-        connection.end();
+        adminMenu();
       });
     });
   };
@@ -123,6 +123,22 @@ var adminMenu = function() {
         console.log("Item added to products.");
         adminQuery();
       });
+    });
+  };
+
+  var adminLowInventory = function() {
+    connection.query("SELECT * FROM products", function(err, res) {
+      if (err) {
+        return console.log(err);
+      }
+      console.log("Low Inventory Items");
+      console.log("----------------------");
+      for (var j = 0; j < res.length; j++) {
+        if (res[j].quantity < 5) {
+          console.log(res[j].product_name + " | Units remaining: " + res[j].quantity);
+        }
+      }
+      adminMenu();
     });
   };
 };
