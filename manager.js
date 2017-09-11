@@ -22,7 +22,11 @@ var adminMenu = function() {
       type: "list",
       message: "Please select:",
       choices: [
-        "View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product", "Exit"
+        "View Products for Sale",
+        "View Low Inventory",
+        "Add to Inventory",
+        "Add New Product",
+        "Exit"
       ],
       name: "choice"
     }
