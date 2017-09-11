@@ -95,10 +95,24 @@ var adminMenu = function() {
         message: "enter the department you would to add it to",
         choices: [
           "Electronics",
-          "Home Decor",
+          "Decor",
           "Fashion",
           "Furniture",
-          "Luggage"
+          "Luggage",
+          "Office Supplies",
+          "Personal Hygiene",
+          "Sporting Goods",
+          "Food",
+          "Toys and Games",
+          "Art",
+          "Home Goods",
+          "Footwear",
+          "Automotive",
+          "Seasonal",
+          "Tools and Hardware",
+          "Appliances",
+          "Alcohol",
+          "Basics"
         ],
         name: "department"
       }, {
