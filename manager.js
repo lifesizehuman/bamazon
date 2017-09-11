@@ -40,9 +40,9 @@ var adminMenu = function() {
       case ("Add to Inventory"):
         adminAddInvetory();
         break;
-      // case ("Add New Product"):
-      //   adminAddItem();
-      //   break;
+      case ("Add New Product"):
+        adminAddItem();
+        break;
     }
   });
 
@@ -80,6 +80,48 @@ var adminMenu = function() {
         connection.query("UPDATE products SET quantity = ? WHERE item_id = ?", [newInventory, argument.item]);
         console.log(argument.quantity + " units added to inventory.");
         connection.end();
+      });
+    });
+  };
+
+  var adminAddItem = function() {
+    inquirer.prompt([
+      {
+        type: "input",
+        message: "enter the name of the item you would like to add",
+        name: "name"
+      }, {
+        type: "list",
+        message: "enter the department you would to add it to",
+        choices: [
+          "Electronics",
+          "Home Decor",
+          "Fashion",
+          "Furniture",
+          "Luggage"
+        ],
+        name: "department"
+      }, {
+        type: "input",
+        message: "enter the item price",
+        name: "price"
+      }, {
+        type: "input",
+        message: "enter the initial inventory quantity",
+        name: "inventory"
+      }
+    ]).then(function(item) {
+      connection.query("INSERT INTO products SET ?", {
+        product_name: item.name,
+        dept_name: item.department,
+        price: item.price,
+        quantity: item.inventory
+      }, function(err, result) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log("Item added to products.");
+        adminQuery();
       });
     });
   };
