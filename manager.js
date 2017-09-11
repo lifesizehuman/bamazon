@@ -112,6 +112,9 @@ var adminMenu = function() {
           "Tools and Hardware",
           "Appliances",
           "Alcohol",
+          "Books",
+          "Movies",
+          "Music",
           "Basics"
         ],
         name: "department"
