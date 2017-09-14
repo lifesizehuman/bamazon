@@ -60,7 +60,7 @@ var buyItem = function() {
       name: "quantity"
     }
   ]).then(function(argument) {
-    connection.query("SELECT quantity, price FROM products WHERE item_id = ?", [argument.item], function(err, res) {
+    connection.query("SELECT quantity, price, product_name FROM products WHERE item_id = ?", [argument.item], function(err, res) {
       var numSold = argument.quantity;
       var totalCost = res[0].price * numSold;
       var newQuantity = parseInt(res[0].quantity - numSold);
@@ -71,7 +71,7 @@ var buyItem = function() {
         return console.log("ERROR: Insufficient store quantity.");
       }
       connection.query("UPDATE products SET quantity = ? WHERE item_id = ?", [newQuantity, argument.item]);
-      console.log("Your order has been placed.");
+      console.log("Your order for " + numSold + " units of " + res[0].product_name + " has been placed.");
       console.log("You spent $" + totalCost + " on your purchase.");
       console.log("Thank you for shopping with Bamazon. Logging you out now. Please come again.");
       connection.end();
