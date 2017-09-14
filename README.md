@@ -1,13 +1,13 @@
-#bamazon
-##HOMEWORK## An Amazon-like command line storefront created with Node.js and mySQL
-###A Coding Bootcamp homework assignment by Slater Combes
+# bamazon
+## HOMEWORK## An Amazon-like command line storefront created with Node.js and mySQL
+### A Coding Bootcamp homework assignment by Slater Combes
 
-##Required Installations
+## Required Installations
 - mysql
 - inquirer
 
 
-##Customer View
+## Customer View
 
 - Allows one to view items for sale.
 
@@ -17,7 +17,7 @@
 
 ![alt text](https://raw.githubusercontent.com/lifesizehuman/bamazon/master/assets/Customer-2.png)
 
-##Manager View
+## Manager View
 
 - Allows one to view items for sale.
 
