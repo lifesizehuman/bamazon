@@ -33,7 +33,7 @@ var mainMenu = function() {
     {
       type: "list",
       message: "Please select:",
-      choices: ["Exit", "Buy an Item"],
+      choices: ["Buy an Item", "Exit"],
       name: "choice"
     }
   ]).then(function(res) {
