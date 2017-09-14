@@ -17,11 +17,18 @@ connection.connect(function(err) {
 });
 
 function queryBamazon() {
+  console.log(`
+    ____  ___    __  ______ _____   ____  _   __
+   / __ )/   |  /  |/  /   /__  /  / __ \/ | / /
+  / __  / /| | / /|_/ / /| | / /  / / / /  |/ /
+ / /_/ / ___ |/ /  / / ___ |/ /__/ /_/ / /|  /
+/_____/_/  |_/_/  /_/_/  |_/____/\____/_/ |_/
+`);
   console.log("Items up for sale");
   console.log("------------------");
   connection.query("SELECT * FROM products", function(err, res) {
     for (var i = 0; i < res.length; i++) {
-      console.log(res[i].item_id + " | " + res[i].product_name + " |  $" + res[i].price + " | " + res[i].quantity);
+      console.log(res[i].item_id + " | " + res[i].product_name + " | Unit Price: $" + res[i].price + " | Units Remaining: " + res[i].quantity);
       console.log("------------------");
     }
     mainMenu();
